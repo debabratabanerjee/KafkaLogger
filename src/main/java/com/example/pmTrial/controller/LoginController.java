@@ -63,7 +63,57 @@ public class LoginController {
 	// getLogin Details
 	// Async Operation
 
-	@SuppressWarnings("unchecked")
+	// Sync Operation
+    
+    // @SuppressWarnings("unchecked")
+    // @GetMapping("/logins")
+    //
+    // public ResponseEntity<String> getLogins(){
+    //
+    // //running
+    // try {
+    // List<UserEntity> result = loginService.getLogins();
+    // log.info("Geting all the login details of all");
+    // proSync.sendSync("the details" + result);
+    // proSync.sendSync("the details" + result);
+    // proSync.sendSync("the details" + result);
+    // proSync.sendSync("the details" + result);
+    //// log.info("the deatils" + result);
+    //// return ResponseHandler.genarateResponse("Successfully retrieved data!",
+    // HttpStatus.OK, result);
+    // return ResponseEntity.ok("Message sent to loginInfo topic");
+    // } catch (Exception e) {
+    // proSync.sendSync(e.getMessage());
+    //// return ResponseHandler.genarateResponse("Bad request",
+    // HttpStatus.BAD_REQUEST, null);
+    //
+    // return (ResponseEntity<String>) ResponseEntity.notFound();
+    //
+    //
+    //
+    //
+    // }
+    // }
+    
+    @SuppressWarnings("unchecked")
+    @GetMapping("/logins/{loginId}")
+    public ResponseEntity<String> getLogin(@PathVariable int loginId) throws InterruptedException {
+    
+    	// logger entry
+    	// doubt edited and running
+    
+    	
+    		UserEntity result = loginService.getLogin(loginId);
+    		// log.info("Geting details of "+ loginId + "with details"+result);
+    		proAsync.sendAsync("Geting details of " + loginId + result);
+    		// return ResponseHandler.genarateResponse("Successfully retrieved data!",
+    		// HttpStatus.OK, result);
+    		return ResponseEntity.ok("Message sent to loginInfo topic");
+    	
+    
+    }
+
+    @SuppressWarnings("unchecked")
 	@GetMapping("/logins")
 
 	public ResponseEntity<String> getLogins() {
@@ -72,7 +122,7 @@ public class LoginController {
 			List<UserEntity> result = loginService.getLogins();
 			log.info("Geting all the login details of all");
 			proAsync.sendAsync(det + result);
-			
+
 			// log.info("the deatils" + result);
 			// return ResponseHandler.genarateResponse("Successfully retrieved data!",
 			// HttpStatus.OK, result);
@@ -118,32 +168,6 @@ public class LoginController {
 	//
 	// }
 	// }
-
-	@SuppressWarnings("unchecked")
-	@GetMapping("/logins/{loginId}")
-	public ResponseEntity<String> getLogin(@PathVariable int loginId) throws InterruptedException {
-
-		// logger entry
-		// doubt edited and running
-
-		try {
-			UserEntity result = loginService.getLogin(loginId);
-			// log.info("Geting details of "+ loginId + "with details"+result);
-			proAsync.sendAsync("Geting details of " + loginId + result);
-			// return ResponseHandler.genarateResponse("Successfully retrieved data!",
-			// HttpStatus.OK, result);
-			return ResponseEntity.ok("Message sent to loginInfo topic");
-		} catch (Exception e) {
-			// return ResponseHandler.genarateResponse(e.getMessage(),
-			// HttpStatus.MULTI_STATUS, null);
-			proAsync.sendAsync(e.getMessage());
-			// log.error(e.getMessage());
-			// return ResponseHandler.genarateResponse("Bad request",
-			// HttpStatus.BAD_REQUEST, null);
-			return (ResponseEntity<String>) ResponseEntity.notFound();
-		}
-
-	}
 
 	@PostMapping("/logins")
 	public void addLogin(@Valid @RequestBody UserEntity login) {
@@ -194,3 +218,5 @@ public class LoginController {
 		}
 	}
 }
+
+

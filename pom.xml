@@ -14,7 +14,7 @@
 	<name>pmTrial</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		
@@ -96,6 +96,8 @@
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
+
+
 <dependency>
     <groupId>org.springframework.kafka</groupId>
     <artifactId>spring-kafka</artifactId>

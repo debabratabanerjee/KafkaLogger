@@ -13,10 +13,9 @@
 		<!-- JSONLayout logs with default logging fields , message is a single 
 			JSON field -->
 		<Kafka name="kafkaLogAppender" topic="loginInfo">
-			<!--  	<JSONLayout />-->
+			  	<JSONLayout />
 			<!--   <HtmlLayout datePattern="ISO8601" timezone="GMT+0"/> -->
 			<!-- <JsonTemplateLayout eventTemplateUri="classpath:EcsLayout.json" /> -->
-			<JsonTemplateLayout eventTemplateUri="classpath:LogstashJsonEventLayoutTrial.json" />
 			<Property name="bootstrap.servers">localhost:9092</Property>
 
 		</Kafka>
